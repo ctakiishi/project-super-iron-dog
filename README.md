@@ -7,6 +7,7 @@ This is a javascript game based on the famous game series Super Mario Bros as pa
 - [Prerequisites](#prerequisites)
 - [Introduction](#introduction)
 - [Version](#version)
+- [Author](#author)
 
 ## Getting Started
 
@@ -22,7 +23,7 @@ Super Iron Dog takes place in the Iron Kingdom where our protagonist, the Dog, l
 
 ## Version 
 
->**Super Iron Dog Version 0.1** - *Published in Aug-16th of 2020**
+>**Super Iron Dog Version 0.1** - *Published in Aug-16th of 2020*
 
 ## Author
 

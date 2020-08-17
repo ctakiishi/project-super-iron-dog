@@ -1,0 +1,13 @@
+body {
+    display: flex;
+    flex-direction: row;
+}
+
+#game-info {
+    width: 500px;
+    height: 640px;
+}
+
+canvas {
+    border: 1px solid black;
+}
