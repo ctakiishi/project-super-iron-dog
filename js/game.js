@@ -1,95 +1,122 @@
-const Game = function() {
+// /* eslint-disable class-methods-use-this */
+// /* eslint-disable max-classes-per-file */
+// /* eslint-disable linebreak-style */
+// /* eslint-disable no-unused-expressions */
+// class Display2 {
+//   constructor(canvas, tileSheet) {
+//     this.tileSheet = tileSheet;
+//     this.buffer = document.createElement('canvas');
+//     this.context = canvas.getContext('2d');
+//     this.scaledSize = 32;
+//     this.spriteSize = 16;
+//     this.columns = 24;
+//     this.rows = 24;
+//     this.map = [3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
+//       3,2,1,1,0,0,3,3,3,2,1,0,3,0,0,0,3,0,0,1,2,2,2,3,
+//       3,1,1,0,0,0,3,3,3,1,0,0,3,0,2,0,3,0,1,1,2,1,1,3,
+//       3,0,0,0,0,0,3,3,2,0,0,0,3,0,0,0,3,1,2,2,2,1,1,3,
+//       3,1,1,0,0,0,3,1,1,0,0,0,3,3,3,0,1,1,2,2,1,0,0,3,
+//       3,0,0,1,2,1,3,1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,3,
+//       3,0,1,2,2,1,3,0,1,0,0,0,0,0,0,0,0,1,0,1,0,1,0,3,
+//       3,0,0,1,1,1,3,1,1,1,0,1,0,0,0,3,0,0,3,3,3,0,0,3,
+//       3,0,0,0,1,1,3,3,3,3,3,3,3,3,3,3,0,0,3,3,3,3,3,3,
+//       3,3,0,3,3,3,3,3,3,3,3,1,0,0,0,3,0,0,3,3,3,2,1,3,
+//       3,3,1,0,0,1,3,3,3,3,3,0,0,0,0,0,0,1,1,0,1,1,0,3,
+//       3,3,3,3,1,1,3,3,3,3,3,1,0,0,0,0,1,1,2,2,1,0,0,3,
+//       3,3,3,3,0,1,0,0,3,3,1,0,0,1,1,2,1,2,0,1,2,1,0,3,
+//       3,2,3,0,0,0,1,0,1,1,0,0,1,0,0,2,1,2,2,1,2,1,1,3,
+//       3,1,1,1,0,0,0,0,1,1,0,0,0,1,1,0,2,1,1,1,2,0,1,3,
+//       3,1,1,1,1,1,0,1,3,3,1,0,0,0,1,1,1,2,2,2,1,1,2,3,
+//       3,0,0,0,1,0,1,1,3,3,1,0,0,0,0,1,0,1,1,1,1,1,1,3,
+//       3,1,1,0,0,0,0,3,3,3,1,1,2,2,0,0,3,3,3,3,3,3,3,3,
+//       3,0,1,0,1,0,1,3,3,3,3,2,2,2,2,1,3,1,0,0,0,0,1,3,
+//       3,1,0,0,0,1,3,3,3,2,1,0,1,2,0,1,0,0,0,1,1,0,0,3,
+//       3,2,0,0,0,0,3,3,3,3,1,1,0,1,1,0,3,0,1,2,2,1,0,3,
+//       3,3,1,0,1,1,3,3,3,3,3,3,0,0,1,1,3,0,0,1,1,0,0,3,
+//       3,3,1,1,2,3,3,3,3,3,3,3,1,0,1,2,3,1,0,0,0,0,1,3,
+//       3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3]
+//   }
 
-  this.world = {
+//   render() {
+//     this.context.drawImage(this.buffer.canvas, 
+//       0, 0, this.buffer.canvas.width, this.buffer.canvas.height, 
+//       0, 0, this.context.canvas.width, this.context.canvas.height); 
+//   }
 
-    background_color:"rgba(40,48,56,0.25)",
+//   drawBackground(x, y, width, height) {
+//     let xMin = Math.floor(x / this.scaledSize);
+//     let yMin = Math.floor(y / this.scaledSize);
+//     let xMax = Math.ceil((x + width) / this.scaledSize);
+//     let yMax = Math.ceil((y + height) / this.scaledSize);
 
-    friction:0.9,
-    gravity:3,
+//     if (xMin < 0) { xMin = 0; }
+//     if (yMin < 0) { yMin = 0; }
+//     if (xMax > this.columns) { xMax = this.columns; }
+//     if (yMax > this.rows) { yMax = this.rows; }
 
-    player:new Game.Player(),
+//     for (let i = xMin; i < xMax; i ++) {
+//       for (let j = yMin; j < yMax; j ++) {
+//         let value = map[j * this.columns + i];
+//         let tileX = Math.floor(i * this.scaledSize - x + this.context.canvas.width * 0.5 - width * 0.5);
+//         let tileY = Math.floor(j * this.scaledSize - y + this.context.canvas.height * 0.5 - height * 0.5);
 
-    height:72,
-    width:128,
+//         this.buffer.drawImage(this.tileSheet, 
+//           value * this.spriteSize, 0, this.spriteSize, this.spriteSize,
+//           tileX, tileY, this.scaledSize, this.scaledSize);
+//   }
+// }
 
-    collideObject:function(object) {
+// class Player {
+//   constructor(tileSheet, width, height, posX, posY) {
+//     this.tileSheet = tileSheet;
+//     this.width = width;
+//     this.height = height;
+//     this.tiles = new Map();
+//     this.posX = posX;
+//     this.posY = posY;
+//     this.jumping = true;
+//     this.speedX = 0;
+//     this.speedY = 0;
+//   }
 
-      if (object.x < 0) { object.x = 0; object.velocity_x = 0; }
-      else if (object.x + object.width > this.width) { object.x = this.width - object.width; object.velocity_x = 0; }
-      if (object.y < 0) { object.y = 0; object.velocity_y = 0; }
-      else if (object.y + object.height > this.height) { object.jumping = false; object.y = this.height - object.height; object.velocity_y = 0; }
+//   render(name, tileX, tileY) {
+//     const buffer = document.createElement('canvas');
+//     buffer.width = this.width;
+//     buffer.height = this.height;
+//     buffer.getContext('2d').drawImage(this.tileSheet,
+//       tileX * this.width, tileY * this.height, this.width, this.height,
+//       0, 0, this.width, this.height);
+//     this.tiles.set(name, buffer);
+//   }
 
-    },
+//   drawPlayer(name, context) {
+//     const buffer = this.tiles.get(name);
+//     context.drawImage(buffer, this.posX, this.posY);
+//   }
 
-    update:function() {
+//   jump() {
+//     if (!this.jumping) {
+//       this.jumping = true;
+//       this.speedY -= 40;
+//     }
+//   }
 
-      this.player.velocity_y += this.gravity;
-      this.player.update();
+//   moveLeft() {
+//     this.speedX -= 1;
+//   }
 
-      this.player.velocity_x *= this.friction;
-      this.player.velocity_y *= this.friction;
+//   moveRight() {
+//     this.speedX += 1;
+//   }
+// }
 
-      this.collideObject(this.player);
+// class viewPort {
+//   constructor(x, width) {
+//     this.x = x;
+//     this.width = width;
+//   }
 
-    }
-
-  };
-
-  this.update = function() {
-
-    this.world.update();
-
-  };
-
-};
-
-Game.prototype = { constructor : Game };
-
-Game.Player = function(x, y) {
-
-  this.color      = "#ff0000";
-  this.height     = 16;
-  this.jumping    = true;
-  this.velocity_x = 0;
-  this.velocity_y = 0;
-  this.width      = 16;
-  this.x          = 100;
-  this.y          = 50;
-
-};
-
-Game.Player.prototype = {
-
-  constructor : Game.Player,
-
-  jump:function() {
-
-    if (!this.jumping) {
-
-      this.color = "#" + Math.floor(Math.random() * 16777216).toString(16);// Change to random color
-      /* toString(16) will not add a leading 0 to a hex value, so this: #0fffff, for example,
-      isn't valid. toString would cut off the first 0. The code below inserts it. */
-      if (this.color.length != 7) {
-
-        this.color = this.color.slice(0, 1) + "0" + this.color.slice(1, 6);
-
-      }
-
-      this.jumping     = true;
-      this.velocity_y -= 20;
-
-    }
-
-  },
-
-  moveLeft:function()  { this.velocity_x -= 0.5; },
-  moveRight:function() { this.velocity_x += 0.5; },
-
-  update:function() {
-
-    this.x += this.velocity_x;
-    this.y += this.velocity_y;
-
-  }
-
-};
+//   scrollTo(x) {
+//     this.x += (x - this.x - this.width * 0.5) * 0.05;
+//   }
+// }

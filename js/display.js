@@ -3,11 +3,73 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable no-unused-expressions */
 class Display {
-  constructor(tileSheet, width, height) {
+  constructor(tileSheet, canvas) {
+    this.tileSheet = {
+      image: tileSheet,
+      rows: 35,
+      columns: 34,
+      tileSize: 16,
+    };
+    this.buffer = document.createElement('canvas').getContext('2d');
+    this.buffer.canvas.width = canvas.width * 0.5;
+    this.buffer.canvas.height = canvas.height * 0.5;
+    this.context = canvas.getContext('2d');
+    this.map = [717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,
+      717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,
+      717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,
+      717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,
+      717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,
+      717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,
+      717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,
+      717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,
+      717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,
+      717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,
+      717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,
+      717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,
+      717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,
+      717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,
+      717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,
+      717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,
+      717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,717,
+      71,71,71,71,71,71,71,71,71,71,71,71,71,71,71,71,71,71,71,71,71,71,71,71,
+      71,71,71,71,71,71,71,71,71,71,71,71,71,71,71,71,71,71,71,71,71,71,71,71,
+      71,71,71,71,71,71,71,71,71,71,71,71,71,71,71,71,71,71,71,71,71,71,71,71];
+    this.columns = 24;
+    this.rows = 24;
+  }
+
+  render() {
+    this.context.drawImage(this.buffer.canvas,
+      0, 0, this.buffer.canvas.width, this.buffer.canvas.height,
+      0, 0, this.context.canvas.width, this.context.canvas.height);
+  }
+
+  drawBackground() {
+    for (let i = this.map.length - 1; i > -1; i--) {
+      const value = this.map[i];
+      const sourceX = (value % this.tileSheet.columns) * this.tileSheet.tileSize;
+      const sourceY = Math.floor(value / this.tileSheet.columns) * this.tileSheet.tileSize;
+      const destinationX = (i % this.columns) * this.tileSheet.tileSize;
+      const destinationY = Math.floor(i / this.columns) * this.tileSheet.tileSize;
+
+      this.buffer.drawImage(this.tileSheet.image,
+        sourceX, sourceY, this.tileSheet.tileSize, this.tileSheet.tileSize,
+        destinationX, destinationY, this.tileSheet.tileSize, this.tileSheet.tileSize);
+    }
+  }
+}
+
+class Player {
+  constructor(tileSheet, width, height, posX, posY) {
     this.tileSheet = tileSheet;
     this.width = width;
     this.height = height;
     this.tiles = new Map();
+    this.posX = posX;
+    this.posY = posY;
+    this.jumping = true;
+    this.speedX = 0;
+    this.speedY = 0;
   }
 
   render(name, tileX, tileY) {
@@ -18,26 +80,6 @@ class Display {
       tileX * this.width, tileY * this.height, this.width, this.height,
       0, 0, this.width, this.height);
     this.tiles.set(name, buffer);
-  }
-
-  drawBackground(name, context, x1, x2, y1, y2) {
-    const buffer = this.tiles.get(name);
-    for (let i = x1; i < x2; i++) {
-      for (let j = y1; j < y2; j++) {
-        context.drawImage(buffer, i * this.width, j * this.height);
-      }
-    }
-  }
-}
-
-class Player extends Display {
-  constructor(tileSheet, width, height, posX, posY) {
-    super(tileSheet, width, height);
-    this.posX = posX;
-    this.posY = posY;
-    this.jumping = true;
-    this.speedX = 0;
-    this.speedY = 0;
   }
 
   drawPlayer(name, context) {
