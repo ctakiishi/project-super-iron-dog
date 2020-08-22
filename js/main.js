@@ -60,14 +60,13 @@ class Board {
   startGame() {
     this.background.drawBackground();
     this.background.render();
-    this.player.render('idle', 3, 5);
+    this.player.render('idle', 1, 1);
     this.player.drawPlayer('idle', this.context);
     this.updateObstacles();
     this.createObstacle();
     this.checkCrash();
     this.frames += 1;
     this.scorePoints();
-    this.showFinalScore();
   }
 
   checkCollision() {
@@ -144,7 +143,7 @@ class Board {
     const randomPosX = Math.floor(Math.random() * (maxPosX - minPosX + 1)) + minPosX;
 
     const image = new Image();
-    image.src = '/img/bug.png';
+    image.src = './img/bug.png';
 
     const newObstacle = new Obstacle(this.canvas, this.context, randomPosX, 0, randomWidth, randomWidth, image);
     return newObstacle;
@@ -162,23 +161,6 @@ class Board {
     this.score.points = Math.floor(this.frames / 5);
     this.score.htmlElement.innerText = this.score.points;
   }
-
-  showFinalScore() {
-    setTimeout(() => {
-      this.road.clearLane();
-
-      this.context.fillStyle = 'black';
-      this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
-      this.context.textAlign = 'center';
-      this.context.font = '50px serif';
-      this.context.fillStyle = 'darkred';
-      this.context.fillText('Game Over!', this.canvas.width / 2, this.canvas.height / 3);
-      this.context.fillStyle = 'white';
-      this.context.fillText('Your final score', this.canvas.width / 2, this.canvas.height / 2);
-      this.context.fillText(`${this.score.points}`, this.canvas.width / 2, this.canvas.height / 1.75);
-      this.context.fillStyle = 'darkred';
-    }, 1000);
-  }
 }
 
 window.onload = () => {
@@ -186,9 +168,9 @@ window.onload = () => {
     const canvas = document.getElementById('screen');
     const context = canvas.getContext('2d');
     const newPlayer = new Image();
-    newPlayer.src = '/img/dog.png';
+    newPlayer.src = './img/dog.png';
     const backGround = new Image();
-    backGround.src = '/img/tiles.png';
+    backGround.src = './img/tiles.png';
 
     backGround.onload = () => {
       const controller = new Controller();
