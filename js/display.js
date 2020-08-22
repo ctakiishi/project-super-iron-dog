@@ -101,4 +101,67 @@ class Player {
   moveRight() {
     this.speedX += 0.5;
   }
+
+  left() {
+    return this.posX;
+  }
+
+  right() {
+    return this.posX + this.width;
+  }
+
+  top() {
+    return this.posY;
+  }
+
+  bottom() {
+    return this.posY;
+  }
+
+  crashWith(obstacle) {
+    return !(this.bottom() < obstacle.top() || 
+    this.top() > obstacle.bottom() || 
+    this.right() < obstacle.left() || 
+    this.left() > obstacle.right());
+  }
+}
+
+class Obstacle {
+  constructor(canvas, context, posX, posY, width, height, image) {
+    this.image = image;
+    this.canvas = canvas;
+    this.context = context;
+    this.posX = posX;
+    this.posY = posY;
+    this.width = width;
+    this.height = height;
+  }
+
+  drawObstacle() {
+    this.context.drawImage(this.image, this.posX, this.posY, this.width, this.height);
+  }
+
+  move(speed) {
+    if (this.posY === 700) {
+      this.posY = 0;
+    } else {
+      this.posY += speed;
+    }
+  }
+
+  left() {
+    return this.posX;
+  }
+
+  right() {
+    return this.posX + this.width;
+  }
+
+  top() {
+    return this.posY;
+  }
+
+  bottom() {
+    return this.posY;
+  }
 }

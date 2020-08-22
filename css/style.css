@@ -1,11 +1,18 @@
 body {
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 
-#game-info {
+#game-intro {
     width: 500px;
     height: 640px;
+}
+
+#start-button {
+    display: flex;
+    align-items: center;
+
 }
 
 canvas {

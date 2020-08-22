@@ -19,9 +19,9 @@ class ButtonInput {
 
 class Controller {
   constructor() {
-    this.left = new ButtonInput();
     this.right = new ButtonInput();
     this.up = new ButtonInput();
+    this.left = new ButtonInput();
   }
 
   keyDownUp(event) {
