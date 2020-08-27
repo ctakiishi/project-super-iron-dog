@@ -199,5 +199,4 @@ class Level {
       this.player.speedY += this.gravity.y;
     }
   }
-
 }
